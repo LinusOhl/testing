@@ -1,6 +1,6 @@
-import { CreateTodoData, Todo } from "./types/Todo";
-import { Result } from "./types/Result";
-import * as TodoAPI from "./services/TodoAPI";
+import { CreateTodoData, Todo } from './types/Todo'
+import { Result } from './types/Result'
+import * as TodoAPI from './services/TodoAPI'
 
 /**
  * Add a new todo
@@ -9,41 +9,41 @@ import * as TodoAPI from "./services/TodoAPI";
  */
 export const addTodo = async (title: string): Promise<Result> => {
 	// check if title is empty
-	if (title === "") {
+	if (title === '') {
 		return {
 			success: false,
-			error: "Title cannot be empty",
-		};
+			error: 'Title cannot be empty',
+		}
 	}
 
 	// check if title isn't long enough
 	if (title.length < 3) {
 		return {
 			success: false,
-			error: "Title must be at least 3 characters long",
-		};
+			error: 'Title must be at least 3 characters long',
+		}
 	}
 
 	// create payload
 	const newTodo: CreateTodoData = {
 		title,
 		completed: false,
-	};
+	}
 
 	// create todo
 	try {
-		await TodoAPI.createTodo(newTodo);
+		await TodoAPI.createTodo(newTodo)
 	} catch (err) {
 		return {
 			success: false,
-			error: "Could not create todo",
-		};
+			error: 'Could not create todo',
+		}
 	}
 
 	return {
 		success: true,
-	};
-};
+	}
+}
 
 /**
  * Toggle todo completed-status
@@ -51,34 +51,34 @@ export const addTodo = async (title: string): Promise<Result> => {
  * @param id Id of the todo
  */
 export const toggleTodo = async (id: number): Promise<Result> => {
-	let todo: Todo;
+	let todo: Todo
 
 	// get todo
 	try {
-		todo = await TodoAPI.getTodo(id);
+		todo = await TodoAPI.getTodo(id)
 	} catch (err) {
 		return {
 			success: false,
-			error: "Todo not found",
-		};
+			error: 'Todo not found',
+		}
 	}
 
 	// update todo
 	try {
 		await TodoAPI.updateTodo(id, {
 			completed: !todo.completed,
-		});
+		})
 	} catch (err) {
 		return {
 			success: false,
-			error: "Could not update todo",
-		};
+			error: 'Could not update todo',
+		}
 	}
 
 	return {
 		success: true,
-	};
-};
+	}
+}
 
 /**
  * Delete todo
@@ -89,15 +89,15 @@ export const toggleTodo = async (id: number): Promise<Result> => {
 export const deleteTodo = async (id: number): Promise<Result> => {
 	// delete todo
 	try {
-		await TodoAPI.deleteTodo(id);
+		await TodoAPI.deleteTodo(id)
 	} catch (err) {
 		return {
 			success: false,
-			error: "Could not delete todo",
-		};
+			error: 'Could not delete todo',
+		}
 	}
 
 	return {
 		success: true,
-	};
-};
+	}
+}
