@@ -1,6 +1,22 @@
-import { describe, it, expect } from "vitest";
+import { beforeAll, afterEach, afterAll, describe, it, expect } from "vitest";
+import { server } from "../mocks/server";
 import * as TodoAPI from "../services/TodoAPI";
 import { TodoData } from "../types/Todo";
+
+// Boot API mocking
+beforeAll(() => {
+	server.listen();
+});
+
+// Reset handlers
+afterEach(() => {
+	server.resetHandlers();
+});
+
+// Clean up
+afterAll(() => {
+	server.close();
+});
 
 const newTodo: TodoData = {
 	title: "Test todo",
