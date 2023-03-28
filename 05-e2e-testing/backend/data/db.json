@@ -3,12 +3,12 @@
     {
       "id": 1,
       "title": "🧪 Learn Unit Testing",
-      "completed": true
+      "completed": false
     },
     {
       "id": 2,
       "title": "🕵🏻‍♂️ Learn spying on functions",
-      "completed": true
+      "completed": false
     },
     {
       "id": 3,
