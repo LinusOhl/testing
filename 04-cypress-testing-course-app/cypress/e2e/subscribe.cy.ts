@@ -6,7 +6,7 @@ describe("Newsletter Subscribe", () => {
 	const subscribeEmail = "john@example.com"
 
 	beforeEach(() => {
-		cy.visit("http://localhost:3000")
+		cy.visit("/")
 	})
 
 	it("allows users to subscribe to the email list", () => {
@@ -26,6 +26,13 @@ describe("Newsletter Subscribe", () => {
 		cy.getByDataTest("submit-button").click()
 		cy.getByDataTest("server-error-message")
 			.should("exist")
-			.contains("already exist")
+			.contains("already exists")
+	})
+
+	it("should not allow subscribing without input", () => {
+		cy.getByDataTest("submit-button").click()
+		cy.getByDataTest("error-message")
+			.should("exist")
+			.contains("Email is required")
 	})
 })
